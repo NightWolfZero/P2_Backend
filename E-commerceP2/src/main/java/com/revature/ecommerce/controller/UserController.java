@@ -68,7 +68,7 @@ public class UserController {
 	public ResponseEntity<Users> updateUsers(@PathVariable(value="id") Integer id, @RequestBody Users user) throws Exception{
 		Users u = ur.findById(id).orElseThrow(()->new Exception("unable to Update your Users Profile for user number: " + id));
 		u.setUsername(user.getUsername());
-		u.setPassword(user.getPassword());
+		u.setPass(user.getPass());
 		u.setBillingAddress(user.getBillingAddress());
 		u.setShippingAddress(user.getShippingAddress());
 		u.setFirstname(user.getFirstname());
@@ -80,24 +80,24 @@ public class UserController {
 	}
 
 	@GetMapping("/users/{id}") //PathVariable value for Angular name I believe
-	public ResponseEntity<Users> getUserById(@PathVariable(value = "user_id") Integer userId) throws ResourceNotFoundException {
+	public ResponseEntity<Users> getUserById(@PathVariable(value = "id") Integer userId) throws ResourceNotFoundException {
 		Users user = ur.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
 		return ResponseEntity.ok().body(user);
 	}
 	
 	@GetMapping("/user/username/{username}") //PathVariable value for Angular name I believe
-	public ResponseEntity<Users> getUsersByUsername(@PathVariable(value="uname")String uname){
+	public ResponseEntity<Users> getUsersByUsername(@PathVariable(value="username")String username){
 		Users user = ur.findByUsername(username);
 		return ResponseEntity.ok().body(user);
 	}
 	
 	 @GetMapping("/login") //Same with RequestParam
-	    public ResponseEntity<Users> login(@RequestParam String uname, @RequestParam String pass) {
+	    public ResponseEntity<Users> login(@RequestParam String username, @RequestParam String pass) {
 			Users user=null;
-			if(us.login(uname, pass)) {
-				user = us.getUserByUsername(uname);
-				username = uname; //whatever the username is in angular
+			if(us.login(username, pass)) {
+				user = us.getUserByUsername(username);
+				username = username; //whatever the username is in angular
 				
 			}
 	        return new ResponseEntity<>(user,HttpStatus.OK);

@@ -24,10 +24,10 @@ private final UserRepository ur;
 	}
 
 //Change value names accordingly
-	public boolean login(String uname, String pass) {
+	public boolean login(String username, String pass) {
 		boolean auth=false;
-		Users us = ur.findByUsername(uname);
-		String actPassword = us.getPassword();
+		Users us = ur.findByUsername(username);
+		String actPassword = us.getPass();
 		if(actPassword.equals(pass)) {
 			auth = true;
 		} else {
@@ -42,8 +42,8 @@ private final UserRepository ur;
 		return ur.save(user);
 	}
 	
-	public Users getUserByUsername(String uname){
-		return ur.findByUsername(uname);
+	public Users getUserByUsername(String username){
+		return ur.findByUsername(username);
 	}
 
 }
