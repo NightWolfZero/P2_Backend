@@ -10,10 +10,10 @@ import com.revature.ecommerce.model.Orders;
 
 @CrossOrigin
 @Repository
-public interface OrderRepository extends JpaRepository<Orders, Long>{
+public interface OrderRepository extends JpaRepository<Orders, Integer>{
 	
 	
-	List<Orders>getOrdersByCustomerUserName(String username);
-	List<Orders>getAllOrders();
+	List<Orders>getOrdersByUserID(String userid);
+	//List<Orders>getAllOrders();
 	
 }

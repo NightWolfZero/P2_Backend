@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.revature.ecommerce.model.Products;
 
 public interface ProductRepository extends JpaRepository<Products, Long>{
-	List<Products>getProductsByManufacturer(String Manufacturer);
-	List<Products>getAllProducts();
-
-	 Page<Products> findByCategoryId(@RequestParam("id") Long id, Pageable pageable);
-
-	    // Used in the product search by keyword
-	    Page<Products> findByNameContaining(@RequestParam("name") String name, Pageable pageable);
+//	List<Products>getProductsByManufacturer(String Manufacturer);
+//	List<Products>getAllProducts();
+//
+//	 Page<Products> findBypCategory(@RequestParam("pCategory") Long id, Pageable pageable);
+//
+//	    // Used in the product search by keyword
+//	    Page<Products> findByNameContaining(@RequestParam("p_name") String name, Pageable pageable);
 }

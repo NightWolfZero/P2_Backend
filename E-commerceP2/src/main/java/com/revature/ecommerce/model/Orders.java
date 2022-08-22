@@ -2,6 +2,7 @@ package com.revature.ecommerce.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,7 +20,10 @@ import lombok.ToString;
 public class Orders implements Serializable{
 	@Id
 	@GeneratedValue
-	private int id;
+	@Column(name = "ordered_product")
+	private String orderedProduct;
+	private int price;
+	private int userID;
 	
 	
 }
