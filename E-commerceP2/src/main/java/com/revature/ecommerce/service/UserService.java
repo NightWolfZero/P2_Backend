@@ -27,7 +27,7 @@ private final UserRepository ur;
 	public boolean login(String username, String pass) {
 		boolean auth=false;
 		Users us = ur.findByUsername(username);
-		String actPassword = us.getPass();
+		String actPassword = us.getPassword();
 		if(actPassword.equals(pass)) {
 			auth = true;
 		} else {

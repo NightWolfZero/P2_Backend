@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.ecommerce.model.Orders;
 import com.revature.ecommerce.repository.OrderRepository;
 
-@CrossOrigin(origins="http://localhost:4200")
+
+@RequestMapping("/g-corp")
 @RestController
-@RequestMapping("/g-corp/checkout")
+@CrossOrigin(origins="http://localhost:4200", allowedHeaders = "http://localhost:4200")
 public class CheckoutController {
 	 
 public OrderRepository or;
@@ -29,8 +30,8 @@ public OrderRepository or;
 
 
 	@PostMapping("/checkout")
-	public ResponseEntity<Orders> checkout(@RequestBody Orders orderDetail ) {
-		Orders order = or.save(orderDetail);
+	public ResponseEntity<Orders> checkout(@RequestBody Orders orders ) {
+		Orders order = or.save(orders);
 		return new ResponseEntity<>(order,HttpStatus.CREATED);
 	}
 	
