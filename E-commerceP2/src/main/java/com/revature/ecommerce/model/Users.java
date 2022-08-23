@@ -11,9 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.springframework.data.repository.query.Param;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +23,8 @@ import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
+@Table(name="users")
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -33,7 +37,7 @@ public class Users implements Serializable{
 	private String phonenumber;
 	private String email;
 	private String username;
-	private String pass;
+	private String password;
 	private String role;
 	private String address;
 
@@ -41,7 +45,7 @@ public class Users implements Serializable{
 	
 	
 public Users(int id, String firstname, String lastname, String phonenumber, String email, String username,
-			String pass, String role, ShippingAddress shippingAddress,
+			String password, String role, ShippingAddress shippingAddress,
 			BillingAddress billingAddress, Users user) {
 		super();
 		this.id = id;
@@ -50,7 +54,7 @@ public Users(int id, String firstname, String lastname, String phonenumber, Stri
 		this.phonenumber = phonenumber;
 		this.email = email;
 		this.username = username;
-		this.pass = pass;
+		this.password = password;
 		this.role = role;
 		this.shippingAddress = shippingAddress;
 		this.billingAddress = billingAddress;

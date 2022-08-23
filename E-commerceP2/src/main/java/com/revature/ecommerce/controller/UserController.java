@@ -27,8 +27,8 @@ import com.revature.ecommerce.repository.UserRepository;
 import com.revature.ecommerce.service.UserService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
 @RequestMapping("/g-corp")
+@CrossOrigin(origins="*")
 public class UserController {
 
 	private UserRepository ur;
@@ -48,27 +48,17 @@ public class UserController {
 
 	
 	@PostMapping("/user")
-	public Users createUser(@RequestBody Users user) {
-		return ur.save(user);
-	}
-	
-	@PostMapping("/user")
 	public Users setUser(@RequestBody Users user) {
 		return ur.save(user);
 	}
 
-	@PostMapping("/user")
-	public void addCustomer(@RequestBody Users user) {
-		ur.save(user);
-	}
-
 
 	
-	@PutMapping("/user/{id}")
+	@PutMapping("/updateuser")
 	public ResponseEntity<Users> updateUsers(@PathVariable(value="id") Integer id, @RequestBody Users user) throws Exception{
 		Users u = ur.findById(id).orElseThrow(()->new Exception("unable to Update your Users Profile for user number: " + id));
 		u.setUsername(user.getUsername());
-		u.setPass(user.getPass());
+		u.setPassword(user.getPassword());
 		u.setBillingAddress(user.getBillingAddress());
 		u.setShippingAddress(user.getShippingAddress());
 		u.setFirstname(user.getFirstname());
@@ -79,32 +69,33 @@ public class UserController {
 		return ResponseEntity.ok().body(updatedUser);
 	}
 
-	@GetMapping("/users/{id}") //PathVariable value for Angular name I believe
-	public ResponseEntity<Users> getUserById(@PathVariable(value = "id") Integer userId) throws ResourceNotFoundException {
-		Users user = ur.findById(userId)
-				.orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
+	@GetMapping("/users/{id}") 
+	public ResponseEntity<Users> getUserById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
+		Users user = ur.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
 		return ResponseEntity.ok().body(user);
 	}
 	
-	@GetMapping("/user/username/{username}") //PathVariable value for Angular name I believe
+	@GetMapping("/user/username/{username}") 
 	public ResponseEntity<Users> getUsersByUsername(@PathVariable(value="username")String username){
 		Users user = ur.findByUsername(username);
 		return ResponseEntity.ok().body(user);
 	}
 	
 	 @GetMapping("/login") //Same with RequestParam
-	    public ResponseEntity<Users> login(@RequestParam String username, @RequestParam String pass) {
-			Users user=null;
-			if(us.login(username, pass)) {
-				user = us.getUserByUsername(username);
-				username = username; //whatever the username is in angular
+	    public ResponseEntity<?> loginCustomer(@RequestParam Users userData) {
+		 System.out.println(userData);	
+		 Users user=ur.findByUsername(userData.getUsername());
+		if(user.getPassword().equals(userData.getPassword()))
+			return ResponseEntity.ok(user);
 				
-			}
-	        return new ResponseEntity<>(user,HttpStatus.OK);
-	        
+			
+			return (ResponseEntity<?>)ResponseEntity.internalServerError();        
 	    }
+	 
+
 		
-		@PostMapping("/register")
+		@GetMapping("/register")
 		public ResponseEntity<Users> registerUser(@RequestBody Users user) {
 			return ResponseEntity.ok(ur.save(user));
 		}

@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
+@RequestMapping("/g-corp")
+@CrossOrigin(origins="http://localhost:4200", allowedHeaders = "http://localhost:4200")
 public class OrderController {
 	
 	@Autowired
