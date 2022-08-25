@@ -14,8 +14,8 @@ import com.revature.ecommerce.repository.OrderRepository;
 
 
 @RequestMapping("/g-corp")
+@CrossOrigin(origins ="*")
 @RestController
-@CrossOrigin(origins="http://localhost:4200", allowedHeaders = "http://localhost:4200")
 public class CheckoutController {
 	 
 public OrderRepository or;

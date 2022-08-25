@@ -26,16 +26,15 @@ public class ShippingAddress {
     private String state;
     private int zip;
 
-    @OneToOne(mappedBy = "shippingAddress")
-    private Users user;
+//    @OneToOne(mappedBy = "shippingAddress")
+//    private Customer user;
 
-	public ShippingAddress(String street, String city, String state, int zip, Users customer) {
+	public ShippingAddress(String street, String city, String state, int zip, Customer customer) {
 		super();
 		this.street = street;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
-		this.user = user;
 	}
     
     

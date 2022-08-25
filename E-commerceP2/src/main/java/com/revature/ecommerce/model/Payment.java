@@ -33,8 +33,8 @@ public class Payment {
     private String zipCode;
     
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id")
-    private Users user;
+    @JoinColumn(name="id")
+    private Customer user;
     
 
 }
