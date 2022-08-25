@@ -30,14 +30,14 @@ public class Admin {
     private String userName;
     private String phoneNumber;
     
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumns({
-    	@JoinColumn(name="user_id", referencedColumnName = "id"),
-    	@JoinColumn(name="email", referencedColumnName="email")
-    } )    
-    private Users user;
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumns({
+//    	@JoinColumn(name="user_id", referencedColumnName = "id")
+////    	@JoinColumn(name="email", referencedColumnName="email")
+//    } )    
+    private Customer user;
 
-	public Admin(String firstname, String lastname, String userName, String phoneNumber, Users user) {
+	public Admin(String firstname, String lastname, String userName, String phoneNumber, Customer user) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
