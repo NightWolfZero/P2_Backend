@@ -6,7 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.revature.ecommerce.model.Products;
 
 public interface ProductRepository extends JpaRepository<Products, Integer>{
-	void deleteProductById(Integer id);
 
-	Optional<Products> findProductById(Integer id);
+	public Optional<Products> findBypId(Integer pId);
+	
+	public Optional<Products> findByptitleContainingIgnoreCase(String ptitle);
 }

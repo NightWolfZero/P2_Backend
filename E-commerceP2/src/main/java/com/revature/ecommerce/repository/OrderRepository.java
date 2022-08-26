@@ -13,7 +13,8 @@ import com.revature.ecommerce.model.Orders;
 public interface OrderRepository extends JpaRepository<Orders, Integer>{
 	
 	
-	List<Orders>getOrdersByUserID(String userid);
-	//<Orders>getAllOrders(String orderedProduct);
+//	List<Orders>findById(String id);
+	
+//	List<Orders>getAllOrders(String orderedProduct);
 	
 }
