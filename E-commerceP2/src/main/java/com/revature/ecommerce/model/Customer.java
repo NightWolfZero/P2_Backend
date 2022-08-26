@@ -2,15 +2,20 @@ package com.revature.ecommerce.model;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,13 +33,16 @@ import lombok.ToString;
 @Table(name="users")
 @EqualsAndHashCode
 @Component
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","carts"})
 public class Customer implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id")
+	@Column(name="cust_id")
 	private Integer id;
-	@Column(name="username")
+	
+	@Column(unique = true)
 		private String username;
+	
 	@Column(name="password")
 		private String password;
 	@Column(name="firstname")
@@ -43,12 +51,17 @@ public class Customer implements Serializable{
 	private String lastName;
 	
 	
-	public Customer(String username, String password, String firstName, String lastName) {
+	@OneToMany(mappedBy = "customer")
+	private Set<Cart> carts = new HashSet<>();
+
+
+	public Customer(String username, String password, String firstName, String lastName, Set<Cart> carts) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.carts = carts;
 	}
 	
 	
@@ -58,20 +71,7 @@ public class Customer implements Serializable{
 }
 
 
-	
 
-
-//	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//	@JoinColumn(name = "shippingAddressId")
-//	private ShippingAddress shippingAddress;
-//
-//	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//	@JoinColumn(name = "billingAddressId")
-//	private BillingAddress billingAddress;
-//
-//	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//	@JoinColumn(name = "id")
-//	private Customer user;
 
 
 	

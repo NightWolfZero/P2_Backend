@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.ecommerce.model.Orders;
-import com.revature.ecommerce.repository.OrderRepository;
+import com.revature.ecommerce.model.Cart;
+import com.revature.ecommerce.repository.CartRepository;
 
 
 @RequestMapping("/g-corp")
@@ -18,11 +18,11 @@ import com.revature.ecommerce.repository.OrderRepository;
 @RestController
 public class CheckoutController {
 	 
-public OrderRepository or;
+public CartRepository or;
 	
 	
 	@Autowired
-	public CheckoutController(OrderRepository or) {
+	public CheckoutController(CartRepository or) {
 		super();
 		this.or = or;
 	}
@@ -30,8 +30,8 @@ public OrderRepository or;
 
 
 	@PostMapping("/checkout")
-	public ResponseEntity<Orders> checkout(@RequestBody Orders orders ) {
-		Orders order = or.save(orders);
+	public ResponseEntity<Cart> checkout(@RequestBody Cart orders ) {
+		Cart order = or.save(orders);
 		return new ResponseEntity<>(order,HttpStatus.CREATED);
 	}
 	
